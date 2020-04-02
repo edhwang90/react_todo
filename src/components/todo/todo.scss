@@ -13,12 +13,9 @@ li {
   font-weight: 600;
 }
 
-input[type='checkbox'] {
-  margin: 0px 20px 20px 0px;
-}
-
 input[type='text'] {
   border: 0;
+  outline: none;
   padding: 10px 20px;
   background-color: $background-color;
 }
@@ -104,7 +101,7 @@ li {
   }
 
   // Checkmark. Could be replaced with an image
-  &:checked + label:after {
+  &:checked + label:after, &:hover + label:after {
     content: '';
     position: absolute;
     left: 7px;

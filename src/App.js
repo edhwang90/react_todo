@@ -35,7 +35,7 @@ class App extends Component {
   handleEmptySubmit = (e) => {
     e.preventDefault();
     this.setState({
-      errorMessage: 'Please provide a todo name'
+      errorMessage: 'Please provide a task name.'
     })
   }
 
