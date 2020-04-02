@@ -1,0 +1,22 @@
+
+.app-header {
+  background-color: #282c34;
+  min-height: 45px;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 15px 30px;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.app-content {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.app-link {
+  color: #61dafb;
+}
