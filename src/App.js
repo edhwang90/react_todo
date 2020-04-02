@@ -7,7 +7,7 @@ import { addTodo, generateId } from './lib/TodoHelpers';
 class App extends Component {
   state = {
     todos: [
-      { id: 1, name: 'React Todo List', isComplete: false },
+      { id: 1, name: 'React Todo List', isComplete: true },
       { id: 2, name: 'React & Redux', isComplete: false },
       { id: 3, name: 'React & Next.js', isComplete: false }
     ],
@@ -46,15 +46,15 @@ class App extends Component {
     return (
       <div className="app">
         <header className="app-header">
-          <h1>React Todos</h1>
+          <h1>To-Do List</h1>
         </header>
         <div className="app-content">
+          <TodoList todos={todos}></TodoList>
           <TodoForm handleInputChange={this.handleInputChange}
                     handleSubmit={submitHandler}
                     currentTodo={currentTodo}>
           </TodoForm>
           {errorMessage && <span className="error">{errorMessage}</span>}
-          <TodoList todos={todos}></TodoList>
         </div>
       </div>
     );

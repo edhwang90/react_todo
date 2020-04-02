@@ -5,8 +5,8 @@ export const TodoItem = (props) => {
   const { id, name, isComplete } = props;
   return (
     <li>
-      <input type="checkbox" defaultChecked={isComplete} />
-      {name}
+      <input className="checkbox" type="checkbox" defaultChecked={isComplete} id={'checkbox' + id} />
+      <label htmlFor={'checkbox' + id}>{name}</label>
     </li>
   )
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import { TodoItem } from './TodoItem';
 import PropTypes from 'prop-types';
 
+import './todo.scss';
+
 export const TodoList = (props) => {
   const { todos } = props;
 
@@ -11,11 +13,11 @@ export const TodoList = (props) => {
     )
   });
   return (
-    <div>
+    <React.Fragment>
       <ul className="todo-list">
         { todosList }
       </ul>
-    </div>
+    </React.Fragment>
   )
 }
 
