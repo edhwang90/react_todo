@@ -20,10 +20,10 @@ export const Header = () => {
           <Link to="/">All</Link>
         </li>
         <li>
-          <Link to="/Active">Active</Link>
+          <Link to="/active">Active</Link>
         </li>
         <li>
-          <Link to="/Completed">Completed</Link>
+          <Link to="/completed">Completed</Link>
         </li>
       </ul>
     </nav>

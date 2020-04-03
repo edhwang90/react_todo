@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.scss';
 
 import { TodoForm, TodoList, Header } from './components/todo';
-import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo } from './lib/TodoHelpers';
+import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
 
 class App extends Component {
+  static contextTypes = {
+    route: PropTypes.string
+  }
 
   state = {
     todos: [
@@ -59,14 +63,17 @@ class App extends Component {
 
   render() {
     const { todos, currentTodo, errorMessage } = this.state;
+    const { route } = this.context;
 
+    const displayTodos = filterTodos(todos, route);
     const submitHandler = currentTodo ? this.handleSubmit : this.handleEmptySubmit;
+
     return (
       <div className="app">
         <Header></Header>
         <div className="app-content">
-          <h1>To-Do List</h1>
-          <TodoList todos={todos}
+          <h1>To-Do List {route}</h1>
+          <TodoList todos={displayTodos}
                     handleRemove={this.handleRemove}
                     handleToggle={this.handleToggle}>
           </TodoList>
