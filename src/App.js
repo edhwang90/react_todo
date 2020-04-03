@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import './App.scss';
 
 import { TodoForm, TodoList } from './components/todo';
-import { addTodo, generateId } from './lib/TodoHelpers';
+import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo } from './lib/TodoHelpers';
+import { pipe, partial } from './lib/utils';
 
 class App extends Component {
+
   state = {
     todos: [
       { id: 1, name: 'React Todo List', isComplete: true },
@@ -15,7 +17,7 @@ class App extends Component {
   }
 
   handleInputChange = (e) => {
-    this.setState({currentTodo: e.target.value});
+    this.setState({ currentTodo: e.target.value });
   }
 
   handleSubmit = (e) => {
@@ -39,6 +41,22 @@ class App extends Component {
     })
   }
 
+  handleToggle = (id) => {
+    const { todos } = this.state;
+    const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, todos));
+    const updatedTodos = getUpdatedTodos(id, todos);
+
+    this.setState({ todos: updatedTodos });
+  }
+
+  handleRemove = (id, e) => {
+    e.preventDefault();
+    const { todos } = this.state;
+    const updatedTodos = removeTodo(todos, id);
+
+    this.setState({ todos: updatedTodos });
+  }
+
   render() {
     const { todos, currentTodo, errorMessage } = this.state;
 
@@ -49,7 +67,10 @@ class App extends Component {
           <h1>To-Do List</h1>
         </header>
         <div className="app-content">
-          <TodoList todos={todos}></TodoList>
+          <TodoList todos={todos}
+                    handleRemove={this.handleRemove}
+                    handleToggle={this.handleToggle}>
+          </TodoList>
           <TodoForm handleInputChange={this.handleInputChange}
                     handleSubmit={submitHandler}
                     currentTodo={currentTodo}>

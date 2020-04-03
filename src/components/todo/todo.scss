@@ -28,94 +28,62 @@ input[type='text'] {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+button {
+  background-color: #dedede;
+  border: 0px;
+  border-radius: 40%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-add:hover, .btn-add.ready {
+  background-color: $success-color;
+}
+
+.btn-remove:hover {
+  background-color: $error-color;
+}
+
+.svg-inline--fa {
+  width: 10px;
+  color: $font-alt-color;
+}
+
+.todo-row {
+  margin-bottom: 20px;
+  display: flex;
+  position: relative;
+
+  .action-bar {
+    display: none;
+    position: absolute;
+    right: 0px;
+  }
 
   button {
-    background-color: #dedede;
-    border: 0px;
-    border-radius: 40%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .svg-inline--fa {
-    width: 10px;
-    color: $font-alt-color;
-  }
-}
-
-li {
-  margin-bottom: 20px;
-}
-
-.checkbox {
-  position: absolute; // take it out of document flow
-  opacity: 0; // hide it
-
-  & + label {
-    position: relative;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  // Box.
-  & + label:before {
-    content: '';
-    margin-right: 10px;
     display: inline-block;
-    vertical-align: text-top;
-    width: 19px;
-    height: 19px;
-    background: #fff;
-    border: 3px solid #dedede;
-    border-radius: 40%;
+    margin-right: 20px;
   }
 
-  // Box hover
-  &:hover + label:before {
-    background: $primary-color;
+  button:last-of-type {
+    margin-right: 0px;
   }
-  
-  // // Box focus
-  // &:focus + label:before {
-  //   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
-  // }
+}
 
-  // Box checked
-  &:checked + label:before {
-    background: $primary-color;
+.todo-row:hover {
+  .action-bar {
+    display: block;
   }
-  
-  // Disabled state label.
-  &:disabled + label {
-    color: #b8b8b8;
-    cursor: auto;
-  }
+}
 
-  // Disabled box.
-  &:disabled + label:before {
-    box-shadow: none;
-    background: #ddd;
-  }
-
-  // Checkmark. Could be replaced with an image
-  &:checked + label:after, &:hover + label:after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 11px;
-    background: white;
-    width: 2px;
-    height: 2px;
-    box-shadow: 
-      2px 0 0 white,
-      4px 0 0 white,
-      4px -2px 0 white,
-      4px -4px 0 white,
-      4px -6px 0 white,
-      4px -8px 0 white;
-    transform: rotate(45deg);
+.todo-row.isComplete-true {
+  label {
+    text-decoration: line-through;
+    color: #dedede;
   }
 }
