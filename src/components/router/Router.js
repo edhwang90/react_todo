@@ -27,12 +27,12 @@ export class Router extends Component {
   }
 
   render () {
-    const { children } = this.props;
+    const { props: { children }, handleLinkClick } = this;
     const { route } = this.state;
 
     const initialContext = {
       route: route,
-      linkHandler: this.handleLinkClick
+      linkHandler: handleLinkClick
     }
 
     return (

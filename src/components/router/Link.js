@@ -14,11 +14,11 @@ export class Link extends Component {
   }
 
   render () {
-    const { children, to } = this.props;
-    const activeClass = this.context.route === to ? 'active' : '';
+    const { props: { children, to }, context, handleClick } = this;
+    const activeClass = context.route === to ? 'active' : '';
 
     return (
-        <a href="#" className={activeClass} onClick={this.handleClick}>{children}</a>
+        <a href="#" className={activeClass} onClick={handleClick}>{children}</a>
     );
   }
 }

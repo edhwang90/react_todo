@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './App.scss';
 
 import { TodoForm, TodoList, Header } from './components/todo';
@@ -61,11 +60,12 @@ class App extends Component {
   }
 
   render() {
-    const { todos, currentTodo, errorMessage } = this.state;
-    const { route } = this.context;
+    const { state: { todos, currentTodo, errorMessage }, context: { route }, 
+            handleEmptySubmit, handleSubmit, handleRemove, handleToggle,
+            handleInputChange } = this;
 
     const displayTodos = filterTodos(todos, route);
-    const submitHandler = currentTodo ? this.handleSubmit : this.handleEmptySubmit;
+    const submitHandler = currentTodo ? handleSubmit : handleEmptySubmit;
 
     return (
       <div className="app">
@@ -73,10 +73,10 @@ class App extends Component {
         <div className="app-content">
           <h1>To-Do List</h1>
           <TodoList todos={displayTodos}
-                    handleRemove={this.handleRemove}
-                    handleToggle={this.handleToggle}>
+                    handleRemove={handleRemove}
+                    handleToggle={handleToggle}>
           </TodoList>
-          <TodoForm handleInputChange={this.handleInputChange}
+          <TodoForm handleInputChange={handleInputChange}
                     handleSubmit={submitHandler}
                     currentTodo={currentTodo}>
           </TodoForm>
