@@ -15,6 +15,12 @@ export class Router extends Component {
     route: getCurrentPath()
   }
 
+  componentDidMount = () => {
+    window.onpopstate = () => {
+      this.setState({ route: getCurrentPath() });
+    }
+  }
+
   handleLinkClick = (route) => {
     this.setState({ route });
     window.history.pushState(null, '', route);
