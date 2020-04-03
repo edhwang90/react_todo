@@ -1,23 +1,5 @@
 @import './import.scss';
 
-html, body, div, p, label, input {
-  background-color: $background-color;
-  color: $font-color;
-  font-family: Lato;
-  font-size: 16px;
-}
-
-.app-header {
-  min-height: 45px;
-  padding: 50px 30px 15px 30px;
-  
-  h1 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 28px;
-  }
-}
-
 .app {
   max-width: 768px;
   margin: 0 auto;
@@ -27,6 +9,13 @@ html, body, div, p, label, input {
   padding: 15px 30px;
   display: flex;
   flex-direction: column;
+
+  h1 {
+    padding: 20px 30px 30px 0px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 28px;
+  }
 }
 
 .error {
@@ -34,3 +23,43 @@ html, body, div, p, label, input {
   font-size: 12px;
   color: $error-color;
 }
+
+button {
+  background-color: #dedede;
+  border: 0px;
+  outline: none;
+  border-radius: 40%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.btn-default:hover {
+  background-color: $primary-color;
+}
+
+.btn-alt:hover {
+  background-color: $font-color;
+}
+
+.btn-add.ready {
+  background-color: $success-color;
+}
+
+.btn-remove:hover {
+  background-color: $error-color;
+}
+
+.svg-inline--fa {
+  color: $font-alt-color;
+}
+
+// @media (hover: none) {
+//   .btn-remove {
+//     background-color: $error-color;
+//   }
+
+//   .btn-alt {
+//     background-color: $font-color;
+//   }
+// }

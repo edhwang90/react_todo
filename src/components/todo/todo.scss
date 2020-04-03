@@ -1,23 +1,44 @@
 @import '../../import.scss';
 
-ul {
-  margin: 0;
-  padding: 0;
-}
 
-li {
-  list-style: none;
-  display: block;
-  padding: 0;
-  margin: 0;
-  font-weight: 600;
-}
+.app-nav {
+  margin: 0px 20px;
+  // border-bottom: 2px solid #dedede;
+  display: flex;
+  justify-content: space-between;
 
-input[type='text'] {
-  border: 0;
-  outline: none;
-  padding: 10px 20px;
-  background-color: $background-color;
+  a {
+    display: inline-block;
+    padding: 20px 10px;
+    margin-right: 25px;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  .svg-inline--fa {
+    font-size: 28px;
+  }
+
+  .routes .active {
+    border-top: 2px solid $primary-color;
+    
+    .svg-inline--fa {
+      color: $primary-color;
+    }
+  }
+
+  .filters {
+    a {
+      font-size: 16px;
+    }
+
+    .active {
+      border-bottom: 2px solid $primary-color;
+
+    }
+  }
 }
 
 .todo-list, .todo-form, .todo-form > input {
@@ -28,42 +49,19 @@ input[type='text'] {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
 
-button {
-  background-color: #dedede;
-  border: 0px;
-  border-radius: 40%;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-
-.btn-default:hover {
-  background-color: $primary-color;
-}
-
-.btn-add:hover, .btn-add.ready {
-  background-color: $success-color;
-}
-
-.btn-remove:hover {
-  background-color: $error-color;
-}
-
-.svg-inline--fa {
-  width: 10px;
-  color: $font-alt-color;
+  input[type='text'] {
+    border: 0;
+    outline: none;
+    padding: 10px 17px;
+    background-color: $background-color;
+  }
 }
 
 .todo-row {
   margin-bottom: 20px;
   display: flex;
   position: relative;
-
-  .action-bar {
-    display: none;
-  }
 
   button {
     display: inline-block;
@@ -75,18 +73,16 @@ button {
   }
 
   label {
-    margin-right: 25px;
+    padding-right: 25px;
   }
-}
 
-.todo-row:hover {
   .action-bar {
-    display: block;
+    display: flex;
   }
 }
 
 .todo-row.isComplete-true {
-  label {
+  span {
     text-decoration: line-through;
     color: #dedede;
   }

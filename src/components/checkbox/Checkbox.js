@@ -12,7 +12,7 @@ export const Checkbox = (props) => {
       id={'checkbox' + id} 
       onChange={handleToggle}
       />
-      <label htmlFor={'checkbox' + id}>{label}</label>
+      <label htmlFor={'checkbox' + id}><span>{label}</span></label>
     </React.Fragment>
   )
 }

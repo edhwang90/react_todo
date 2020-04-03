@@ -22,7 +22,7 @@ export const TodoItem = (props) => {
       </Checkbox>
 
       <div className="action-bar">
-        {/* <button className="btn-default" onClick={handleTodoPin}><FontAwesomeIcon icon={faThumbtack} /></button> */}
+        {/* <button className="btn-alt" ><FontAwesomeIcon icon={faThumbtack} /></button> */}
         <button className="btn-remove" onClick={handleTodoRemove}><FontAwesomeIcon icon={faTrash} /></button>
       </div>
     </li>

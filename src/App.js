@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 
-import { TodoForm, TodoList } from './components/todo';
+import { TodoForm, TodoList, Header } from './components/todo';
 import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
 
@@ -9,9 +9,9 @@ class App extends Component {
 
   state = {
     todos: [
-      { id: 1, name: 'React Todo List', isComplete: true },
-      { id: 2, name: 'React & Redux', isComplete: false },
-      { id: 3, name: 'React & Next.js', isComplete: false }
+      { id: 1, name: 'Duis aute irure', isComplete: true },
+      { id: 2, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', isComplete: false },
+      { id: 3, name: 'Ut enim ad minima veniam, quis nostrum', isComplete: false }
     ],
     currentTodo: ''
   }
@@ -63,10 +63,9 @@ class App extends Component {
     const submitHandler = currentTodo ? this.handleSubmit : this.handleEmptySubmit;
     return (
       <div className="app">
-        <header className="app-header">
-          <h1>To-Do List</h1>
-        </header>
+        <Header></Header>
         <div className="app-content">
+          <h1>To-Do List</h1>
           <TodoList todos={todos}
                     handleRemove={this.handleRemove}
                     handleToggle={this.handleToggle}>
