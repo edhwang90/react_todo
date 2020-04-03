@@ -36,9 +36,11 @@ button {
   border-radius: 40%;
   width: 25px;
   height: 25px;
-  display: flex;
-  justify-content: center;
   cursor: pointer;
+}
+
+.btn-default:hover {
+  background-color: $primary-color;
 }
 
 .btn-add:hover, .btn-add.ready {
@@ -61,17 +63,19 @@ button {
 
   .action-bar {
     display: none;
-    position: absolute;
-    right: 0px;
   }
 
   button {
     display: inline-block;
-    margin-right: 20px;
+    margin-right: 15px;
   }
 
   button:last-of-type {
     margin-right: 0px;
+  }
+
+  label {
+    margin-right: 25px;
   }
 }
 

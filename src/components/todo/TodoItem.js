@@ -5,7 +5,7 @@ import { partial } from '../../lib/utils';
 import { Checkbox } from '../checkbox';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoItem = (props) => {
   const { id, name, isComplete, handleToggle, handleRemove } = props;
@@ -22,6 +22,7 @@ export const TodoItem = (props) => {
       </Checkbox>
 
       <div className="action-bar">
+        {/* <button className="btn-default" onClick={handleTodoPin}><FontAwesomeIcon icon={faThumbtack} /></button> */}
         <button className="btn-remove" onClick={handleTodoRemove}><FontAwesomeIcon icon={faTrash} /></button>
       </div>
     </li>

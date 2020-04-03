@@ -44,7 +44,7 @@ class App extends Component {
   handleToggle = (id) => {
     const { todos } = this.state;
     const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, todos));
-    const updatedTodos = getUpdatedTodos(id, todos);
+    const updatedTodos = getUpdatedTodos(todos, id);
 
     this.setState({ todos: updatedTodos });
   }
