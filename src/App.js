@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import './App.scss';
 
 import { TodoForm, TodoList, Header } from './components/todo';
+import { RouterContext } from './components/router';
 import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
 
 class App extends Component {
-  static contextTypes = {
-    route: PropTypes.string
-  }
+  static contextType = RouterContext;
 
   state = {
     todos: [
@@ -72,7 +71,7 @@ class App extends Component {
       <div className="app">
         <Header></Header>
         <div className="app-content">
-          <h1>To-Do List {route}</h1>
+          <h1>To-Do List</h1>
           <TodoList todos={displayTodos}
                     handleRemove={this.handleRemove}
                     handleToggle={this.handleToggle}>

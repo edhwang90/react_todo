@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { RouterContext } from './Router';
+
 export class Link extends Component {
-  static contextTypes = {
-    route: PropTypes.string,
-    linkHandler: PropTypes.func
-  }
+  static contextType = RouterContext;
 
   handleClick = (e) => {
     e.preventDefault();
@@ -18,7 +17,9 @@ export class Link extends Component {
     const { children, to } = this.props;
     const activeClass = this.context.route === to ? 'active' : '';
 
-    return <a href="#" className={activeClass} onClick={this.handleClick}>{children}</a>
+    return (
+        <a href="#" className={activeClass} onClick={this.handleClick}>{children}</a>
+    );
   }
 }
 

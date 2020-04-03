@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 const getCurrentPath = () => {
   const path = document.location.pathname;
   return path.substring(path.lastIndexOf('/'));
 }
 
+export const RouterContext = React.createContext({
+  route: getCurrentPath(),
+  linkHandler: () => {}
+});
+
 export class Router extends Component {
   state = {
     route: getCurrentPath()
-  }
-
-  static childContextTypes = {
-    route: PropTypes.string,
-    linkHandler: PropTypes.func
-  }
-
-  getChildContext = () => {
-    const { route } = this.state;
-    return {
-      route: route,
-      linkHandler: this.handleLinkClick
-    }
   }
 
   handleLinkClick = (route) => {
@@ -30,11 +21,19 @@ export class Router extends Component {
   }
 
   render () {
-    const { children } = this.props
+    const { children } = this.props;
+    const { route } = this.state;
+
+    const initialContext = {
+      route: route,
+      linkHandler: this.handleLinkClick
+    }
+
     return (
-      <div>
+      <RouterContext.Provider value={initialContext}>
         {children}
-      </div>
+      </RouterContext.Provider>
     )
   }
 }
+
