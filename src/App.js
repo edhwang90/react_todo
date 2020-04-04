@@ -18,7 +18,8 @@ class App extends Component {
 
   componentDidMount = () => {
     readTodos()
-      .then(todos => this.setState({ todos }));
+      .then(todos => this.setState({ todos }))
+      .catch(err => this.showTempMessage(`${err}`, true));
   }
 
   showTempMessage = (msg, isError) => {
@@ -49,7 +50,8 @@ class App extends Component {
           todos: updatedTodos,
           currentTodo: '',
         });
-      });
+      })
+      .catch(err => this.showTempMessage(`${err}`, true));
   }
 
   handleEmptySubmit = (e) => {
@@ -73,7 +75,8 @@ class App extends Component {
         this.setState({ 
           todos: updatedTodos 
         });
-      }).catch(() => { this.showTempMessage('Error!', true); });
+      })
+      .catch(err => this.showTempMessage(`${err}`, true));
   }
 
   handleRemove = (id, e) => {
@@ -86,7 +89,7 @@ class App extends Component {
         this.showTempMessage('Success!', false);
         this.setState({ todos: updatedTodos });
       })
-      .catch(() => { this.showTempMessage('Error!', true); });
+      .catch(err => this.showTempMessage(`${err}`, true));
   }
 
   render() {
