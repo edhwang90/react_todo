@@ -113,8 +113,7 @@ class App extends Component {
                     handleSubmit={submitHandler}
                     currentTodo={currentTodo}>
           </TodoForm>
-          {message && <span className={ !isError ? 'success' : 'error'}>{message}</span>}
-          {/* {errorMessage && <span className="error">{errorMessage}</span>} */}
+          {message && <span className={ !isError ? 'toastr success' : 'toastr error'}>{message}</span>}
         </div>
       </div>
     );

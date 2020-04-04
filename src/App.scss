@@ -18,7 +18,7 @@
   }
 }
 
-.error, .success {
+.toastr {
   display: block;
   position: absolute;
   left: 20px;
@@ -66,13 +66,3 @@ button {
 .svg-inline--fa {
   color: $font-alt-color;
 }
-
-// @media (hover: none) {
-//   .btn-remove {
-//     background-color: $error-color;
-//   }
-
-//   .btn-alt {
-//     background-color: $font-color;
-//   }
-// }
