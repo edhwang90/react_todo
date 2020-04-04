@@ -18,10 +18,23 @@
   }
 }
 
-.error {
-  margin-left: 43px;
+.error, .success {
+  display: block;
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: 20px;
+  padding: 10px 15px;
   font-size: 12px;
-  color: $error-color;
+  color: #ffffff;
+}
+
+.success {
+  background-color: $success-color;  
+}
+
+.error {
+  background-color: $error-color;
 }
 
 button {

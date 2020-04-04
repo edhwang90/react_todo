@@ -3,7 +3,7 @@ import { addTodo,
          findById,
          generateId,
          toggleTodo,
-         updateTodo,
+         updateTodos,
          filterTodos
        } from './TodoHelpers';
 
@@ -92,7 +92,7 @@ test('updateTodo should update the todo list', () => {
     { id: 2, name: 'two', isComplete: true }
   ];
 
-  const result = updateTodo(defaultTodos, updatedTodo);
+  const result = updateTodos(defaultTodos, updatedTodo);
 
   expect(result).toEqual(expected);
 });

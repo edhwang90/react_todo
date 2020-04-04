@@ -3,19 +3,31 @@ import './App.scss';
 
 import { TodoForm, TodoList, Header } from './components/todo';
 import { RouterContext } from './components/router';
-import { addTodo, generateId, findById, toggleTodo, updateTodo, removeTodo, filterTodos } from './lib/TodoHelpers';
+import { addTodo, generateId, findById, toggleTodo, updateTodos, removeTodo, filterTodos } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
+
+import { readTodos, createTodo, updateTodo, deleteTodo } from './lib/TodoService';
 
 class App extends Component {
   static contextType = RouterContext;
 
   state = {
-    todos: [
-      { id: 1, name: 'Duis aute irure', isComplete: true },
-      { id: 2, name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', isComplete: false },
-      { id: 3, name: 'Ut enim ad minima veniam, quis nostrum', isComplete: false }
-    ],
+    todos: [],
     currentTodo: ''
+  }
+
+  componentDidMount = () => {
+    readTodos()
+      .then(todos => this.setState({ todos }));
+  }
+
+  showTempMessage = (msg, isError) => {
+    const timer = isError ? 5000 : 2500;
+    this.setState({ message: msg, isError: isError });
+
+    setTimeout(() => {
+      this.setState({ message: '' })
+    }, timer);
   }
 
   handleInputChange = (e) => {
@@ -29,26 +41,39 @@ class App extends Component {
     const newTodo = { id: newId, name: currentTodo, isComplete: false }
     const updatedTodos = addTodo(todos, newTodo);
 
-    this.setState({
-      todos: updatedTodos,
-      currentTodo: '',
-      errorMessage: ''
-    });
+    createTodo(newTodo)
+      .then(() => {
+        this.showTempMessage('Success!', false);
+
+        this.setState({
+          todos: updatedTodos,
+          currentTodo: '',
+        });
+      });
   }
 
   handleEmptySubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      errorMessage: 'Please provide a task name.'
-    })
+    this.showTempMessage('Error! Please provide a Todo.', true);
   }
 
   handleToggle = (id) => {
     const { todos } = this.state;
-    const getUpdatedTodos = pipe(findById, toggleTodo, partial(updateTodo, todos));
-    const updatedTodos = getUpdatedTodos(todos, id);
 
-    this.setState({ todos: updatedTodos });
+    const getToggledTodo = pipe(findById, toggleTodo);
+    const updatedTodo = getToggledTodo(todos, id);
+    
+    const getUpdatedTodos = partial(updateTodos, todos);
+    const updatedTodos = getUpdatedTodos(updatedTodo);
+
+    updateTodo(updatedTodo)
+      .then(() => {
+        this.showTempMessage('Success!', false);
+
+        this.setState({ 
+          todos: updatedTodos 
+        });
+      }).catch(() => { this.showTempMessage('Error!', true); });
   }
 
   handleRemove = (id, e) => {
@@ -56,11 +81,16 @@ class App extends Component {
     const { todos } = this.state;
     const updatedTodos = removeTodo(todos, id);
 
-    this.setState({ todos: updatedTodos });
+    deleteTodo(id)
+      .then(() => {
+        this.showTempMessage('Success!', false);
+        this.setState({ todos: updatedTodos });
+      })
+      .catch(() => { this.showTempMessage('Error!', true); });
   }
 
   render() {
-    const { state: { todos, currentTodo, errorMessage }, context: { route }, 
+    const { state: { todos, currentTodo, message, isError }, context: { route }, 
             handleEmptySubmit, handleSubmit, handleRemove, handleToggle,
             handleInputChange } = this;
 
@@ -80,7 +110,8 @@ class App extends Component {
                     handleSubmit={submitHandler}
                     currentTodo={currentTodo}>
           </TodoForm>
-          {errorMessage && <span className="error">{errorMessage}</span>}
+          {message && <span className={ !isError ? 'success' : 'error'}>{message}</span>}
+          {/* {errorMessage && <span className="error">{errorMessage}</span>} */}
         </div>
       </div>
     );
