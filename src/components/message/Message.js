@@ -7,9 +7,9 @@ export const Message = (props) => {
   const { id, text, isError, handleMessageClick } = props;
 
   return (
-    <div className={ isError ? 'toastr error' : 'toastr success'}>
+    <li className={ isError ? 'toastr error' : 'toastr success'}>
       <span>{text}</span>
       <button onClick={() => { handleMessageClick(id) }}><FontAwesomeIcon icon={faTimes} /></button>
-    </div>
+    </li>
   )
 }
