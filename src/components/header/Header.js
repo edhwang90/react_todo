@@ -4,7 +4,7 @@ import { Link } from '../router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 
-import './todo.scss';
+import './index.scss';
 
 export const Header = () => {
   return (

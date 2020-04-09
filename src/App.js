@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './App.scss';
 
-import { TodoForm, TodoList, Header } from './components/todo';
+import { TodoList } from './components/todo';
+import { Header } from './components/header';
+import { TodoForm } from './components/todo-form';
+import { MessageList } from './components/message';
 import { RouterContext } from './components/router';
 import { addTodo, generateId, findById, toggleTodo, updateTodos, removeTodo, filterTodos } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
@@ -13,7 +16,8 @@ class App extends Component {
 
   state = {
     todos: [],
-    currentTodo: ''
+    currentTodo: '',
+    messages: []
   }
 
   componentDidMount = () => {
@@ -23,12 +27,23 @@ class App extends Component {
   }
 
   showTempMessage = (msg, isError) => {
+    const { state: { messages }, hideTempMessage } = this;
     const timer = isError ? 5000 : 2500;
-    this.setState({ message: msg, isError: isError });
+    const msgId = generateId();
+    const newMsg = { id: msgId, text: msg, isError: isError };
+    this.setState({ messages: [newMsg, ...messages] });
 
     setTimeout(() => {
-      this.setState({ message: '' })
+      hideTempMessage(msgId);
     }, timer);
+  }
+
+  hideTempMessage = (id) => {
+    const { messages } = this.state;
+    
+    this.setState({ 
+      messages: messages.filter((msg) => msg.id !== id)
+    });
   }
 
   handleInputChange = (e) => {
@@ -93,15 +108,16 @@ class App extends Component {
   }
 
   render() {
-    const { state: { todos, currentTodo, message, isError }, context: { route }, 
+    const { state: { todos, currentTodo, messages }, context: { route }, 
             handleEmptySubmit, handleSubmit, handleRemove, handleToggle,
-            handleInputChange } = this;
+            handleInputChange, hideTempMessage } = this;
 
     const displayTodos = filterTodos(todos, route);
     const submitHandler = currentTodo ? handleSubmit : handleEmptySubmit;
 
     return (
       <div className="app">
+        <MessageList messages={messages} handleMessageClick={hideTempMessage}></MessageList>
         <Header></Header>
         <div className="app-content">
           <h1>To-Do List</h1>
@@ -113,7 +129,6 @@ class App extends Component {
                     handleSubmit={submitHandler}
                     currentTodo={currentTodo}>
           </TodoForm>
-          {message && <span className={ !isError ? 'toastr success' : 'toastr error'}>{message}</span>}
         </div>
       </div>
     );

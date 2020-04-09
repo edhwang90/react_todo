@@ -1,0 +1,39 @@
+@import '../../import.scss';
+
+.app-nav {
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    display: inline-block;
+    padding: 20px 10px;
+    margin-right: 25px;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  .svg-inline--fa {
+    font-size: 28px;
+  }
+
+  .routes .active {
+    border-top: 2px solid $primary-color;
+    
+    .svg-inline--fa {
+      color: $primary-color;
+    }
+  }
+
+  .filters {
+    a {
+      font-size: 16px;
+    }
+
+    .active {
+      border-bottom: 2px solid $primary-color;
+
+    }
+  }
+}

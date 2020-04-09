@@ -1,0 +1,39 @@
+@import '../../import.scss';
+
+.todo-list {
+  width: 100%;
+}
+
+.todo-row {
+  margin-bottom: 20px;
+  display: flex;
+  position: relative;
+
+  button {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  button:last-of-type {
+    margin-right: 0px;
+  }
+
+  label {
+    padding-right: 25px;
+  }
+
+  .action-bar {
+    display: flex;
+  }
+}
+
+.todo-row:last-of-type {
+  margin-bottom: 0px;
+}
+
+.todo-row.isComplete-true {
+  span {
+    text-decoration: line-through;
+    color: #dedede;
+  }
+}

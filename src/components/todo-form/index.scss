@@ -1,0 +1,18 @@
+@import '../../import.scss';
+
+.todo-form, .todo-form > input {
+  width: 100%;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  input[type='text'] {
+    border: 0;
+    outline: none;
+    padding: 10px 17px;
+    background-color: $background-color;
+  }
+}

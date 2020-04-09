@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import './index.scss';
+
 export const TodoForm = (props) => {
   const { handleInputChange, handleSubmit, currentTodo } = props;
   
