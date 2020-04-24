@@ -6,7 +6,7 @@ import { Header } from './components/header';
 import { TodoForm } from './components/todo-form';
 import { MessageList } from './components/message';
 import { RouterContext } from './components/router';
-import { addTodo, generateId, updateTodos, toggleTodo, removeTodo, filterTodos } from './lib/TodoHelpers';
+import { addTodo, generateId, findById, updateTodos, toggleTodo, removeTodo, filterTodos } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
 
 import { readTodos, createTodo, updateTodo, deleteTodo } from './lib/TodoService';
@@ -74,11 +74,11 @@ class App extends Component {
     this.showTempMessage('Error! Please provide a Todo.', true);
   }
 
-  handleToggle = (toToggle) => {
+  handleToggle = (id) => {
     const { todos } = this.state;
-
-    toToggle = toggleTodo(toToggle);
-
+    const getToggledTodo = pipe(findById, toggleTodo);
+    const toToggle = getToggledTodo(todos, id);
+ 
     updateTodo(toToggle)
       .then((res) => {
         this.showTempMessage('Success!', false);

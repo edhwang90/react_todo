@@ -8,14 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoItem = (props) => {
-  const { todo, handleToggle, handleRemove } = props;
-  const { name, id, isComplete } = props.todo;
+  const { name, id, isComplete, handleToggle, handleRemove } = props;
  
   return (
     <li className={'todo-row isComplete-' + isComplete}>
       <Checkbox toggleProp={isComplete}
                 label={name}
-                data={todo}
+                data={id}
                 id={id}
                 handleToggle={handleToggle}>
       </Checkbox>
@@ -26,4 +25,10 @@ export const TodoItem = (props) => {
       </div>
     </li>
   )
+}
+
+TodoItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  isComplete: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired
 }
