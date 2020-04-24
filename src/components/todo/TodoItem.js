@@ -8,29 +8,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 
 export const TodoItem = (props) => {
-  const { id, name, isComplete, handleToggle, handleRemove } = props;
-
-  const handleTodoToggle = partial(handleToggle, id);
-  const handleTodoRemove = partial(handleRemove, id);
-
+  const { todo, handleToggle, handleRemove } = props;
+  const { name, id, isComplete } = props.todo;
+ 
   return (
     <li className={'todo-row isComplete-' + isComplete}>
       <Checkbox toggleProp={isComplete}
                 label={name}
+                data={todo}
                 id={id}
-                handleToggle={handleTodoToggle}>
+                handleToggle={handleToggle}>
       </Checkbox>
 
       <div className="action-bar">
         {/* <button className="btn-alt" ><FontAwesomeIcon icon={faThumbtack} /></button> */}
-        <button className="btn-remove" onClick={handleTodoRemove}><FontAwesomeIcon icon={faTrash} /></button>
+        <button className="btn-remove" onClick={(e) => handleRemove(e, id)}><FontAwesomeIcon icon={faTrash} /></button>
       </div>
     </li>
   )
-}
-
-TodoItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  isComplete: PropTypes.bool.isRequired,
-  id: PropTypes.number.isRequired
 }

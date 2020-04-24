@@ -6,7 +6,7 @@ import { Header } from './components/header';
 import { TodoForm } from './components/todo-form';
 import { MessageList } from './components/message';
 import { RouterContext } from './components/router';
-import { addTodo, generateId, findById, toggleTodo, updateTodos, removeTodo, filterTodos } from './lib/TodoHelpers';
+import { addTodo, generateId, updateTodos, toggleTodo, removeTodo, filterTodos } from './lib/TodoHelpers';
 import { pipe, partial } from './lib/utils';
 
 import { readTodos, createTodo, updateTodo, deleteTodo } from './lib/TodoService';
@@ -74,27 +74,23 @@ class App extends Component {
     this.showTempMessage('Error! Please provide a Todo.', true);
   }
 
-  handleToggle = (id) => {
+  handleToggle = (toToggle) => {
     const { todos } = this.state;
 
-    const getToggledTodo = pipe(findById, toggleTodo);
-    const updatedTodo = getToggledTodo(todos, id);
-    
-    const getUpdatedTodos = partial(updateTodos, todos);
-    const updatedTodos = getUpdatedTodos(updatedTodo);
+    toToggle = toggleTodo(toToggle);
 
-    updateTodo(updatedTodo)
-      .then(() => {
+    updateTodo(toToggle)
+      .then((res) => {
         this.showTempMessage('Success!', false);
 
         this.setState({ 
-          todos: updatedTodos 
+          todos: updateTodos(todos, res) 
         });
       })
       .catch(err => this.showTempMessage(`${err}`, true));
   }
 
-  handleRemove = (id, e) => {
+  handleRemove = (e, id) => {
     e.preventDefault();
     const { todos } = this.state;
     const updatedTodos = removeTodo(todos, id);

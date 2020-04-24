@@ -10,7 +10,7 @@ export const TodoList = (props) => {
   let todosList = todos.map(todo => {
     return (
       <TodoItem key={todo.id} 
-                {...todo}
+                todo={todo}
                 handleToggle={handleToggle}
                 handleRemove={handleRemove}>
       </TodoItem>
